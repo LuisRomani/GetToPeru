@@ -1148,13 +1148,13 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 .iti__flag {
   height: 15px;
   box-shadow: 0px 0px 1px 0px #888;
-  background-image: url(../images/vendor/intl-tel-input/build/flags11db.png?007b2705c0a8f69dfdf6ea1bfa0341c9);
+  background-image: url(../images/vendor/intl-tel-input/build/flags11db.PNG?007b2705c0a8f69dfdf6ea1bfa0341c9);
   background-repeat: no-repeat;
   background-color: #DBDBDB;
   background-position: 20px 0; }
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .iti__flag {
-      background-image: url(../images/vendor/intl-tel-input/build/flags%402x00a3.png?9d5328fb490cddd43f6698012123404b); } }
+      background-image: url(../images/vendor/intl-tel-input/build/flags%402x00a3.PNG?9d5328fb490cddd43f6698012123404b); } }
 
 .iti__flag.iti__np {
   background-color: transparent; }
