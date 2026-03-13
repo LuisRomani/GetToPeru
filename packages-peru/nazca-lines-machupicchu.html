@@ -1803,7 +1803,8 @@
                         <div class="col-span-6 md:col-span-5 grid grid-cols-7 gap-2">
                             <label
                                 class="cursor-pointer btn-check-form  flex justify-start items-start relative bg-gray-50 dark:bg-gray-700 border border-gray-400 py-3 flex flex-shrink-0 justify-center items-center hover:bg-white  hover:border-secondary transition duration-500">
-                                <input wire:model="values_number" type="radio" value="1" class="hidden absolute">
+                                <input wire:model="values_number" name="travelers" type="radio" value="1"
+                                    class="hidden absolute">
                                 <svg class="fill-current hidden absolute left-0 top-0 p-1  w-7 h-7 text-secondary pointer-events-none"
                                     viewBox="0 0 20 20">
                                     <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
@@ -1814,7 +1815,8 @@
                             </label>
                             <label
                                 class="cursor-pointer btn-check-form  flex justify-start items-start relative bg-gray-50 dark:bg-gray-700 border border-gray-400 py-3 flex flex-shrink-0 justify-center items-center hover:bg-white  hover:border-secondary transition duration-500">
-                                <input wire:model="values_number" type="radio" value="2" class="hidden absolute">
+                                <input wire:model="values_number" name="travelers" type="radio" value="2"
+                                    class="hidden absolute">
                                 <svg class="fill-current hidden absolute left-0 top-0 p-1  w-7 h-7 text-secondary pointer-events-none"
                                     viewBox="0 0 20 20">
                                     <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
@@ -1825,7 +1827,8 @@
                             </label>
                             <label
                                 class="cursor-pointer btn-check-form  flex justify-start items-start relative bg-gray-50 dark:bg-gray-700 border border-gray-400 py-3 flex flex-shrink-0 justify-center items-center hover:bg-white  hover:border-secondary transition duration-500">
-                                <input wire:model="values_number" type="radio" value="3" class="hidden absolute">
+                                <input wire:model="values_number" name="travelers" type="radio" value="3"
+                                    class="hidden absolute">
                                 <svg class="fill-current hidden absolute left-0 top-0 p-1  w-7 h-7 text-secondary pointer-events-none"
                                     viewBox="0 0 20 20">
                                     <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
@@ -1836,7 +1839,8 @@
                             </label>
                             <label
                                 class="cursor-pointer btn-check-form  flex justify-start items-start relative bg-gray-50 dark:bg-gray-700 border border-gray-400 py-3 flex flex-shrink-0 justify-center items-center hover:bg-white  hover:border-secondary transition duration-500">
-                                <input wire:model="values_number" type="radio" value="4" class="hidden absolute">
+                                <input wire:model="values_number" name="travelers" type="radio" value="4"
+                                    class="hidden absolute">
                                 <svg class="fill-current hidden absolute left-0 top-0 p-1  w-7 h-7 text-secondary pointer-events-none"
                                     viewBox="0 0 20 20">
                                     <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
@@ -1847,7 +1851,8 @@
                             </label>
                             <label
                                 class="cursor-pointer btn-check-form  flex justify-start items-start relative bg-gray-50 dark:bg-gray-700 border border-gray-400 py-3 flex flex-shrink-0 justify-center items-center hover:bg-white  hover:border-secondary transition duration-500">
-                                <input wire:model="values_number" type="radio" value="5" class="hidden absolute">
+                                <input wire:model="values_number" name="travelers" type="radio" value="5"
+                                    class="hidden absolute">
                                 <svg class="fill-current hidden absolute left-0 top-0 p-1  w-7 h-7 text-secondary pointer-events-none"
                                     viewBox="0 0 20 20">
                                     <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
@@ -1856,25 +1861,21 @@
                                     <div class="select-none block">5</div>
                                 </span>
                             </label>
-                            <label x-data="{open: false}"
-                                class="cursor-pointer btn-check-form  flex justify-start items-start relative bg-gray-50 dark:bg-gray-700 border border-gray-400 flex flex-shrink-0 justify-center items-center hover:bg-white  hover:border-secondary transition duration-500"
-                                x-on:click="open = true" x-on:click.away="open = false">
-                                <input wire:model="values_number" type="radio" value="6" class="hidden absolute">
+                            <label
+                                class="cursor-pointer btn-check-form  flex justify-start items-start relative bg-gray-50 dark:bg-gray-700 border border-gray-400 py-3 flex flex-shrink-0 justify-center items-center hover:bg-white  hover:border-secondary transition duration-500">
+                                <input wire:model="values_number" name="travelers" type="radio" value="6"
+                                    class="hidden absolute">
                                 <svg class="fill-current hidden absolute left-0 top-0 p-1  w-7 h-7 text-secondary pointer-events-none"
                                     viewBox="0 0 20 20">
                                     <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
                                 </svg>
                                 <span class="flex flex-col text-center">
-                                    <div class="select-none block">
-                                        <span class="text-xss md:text-xss break-words">Specify</span>
-                                        <input wire:model="values_number_input" x-show="open" type="text"
-                                            class="form-input text-xs w-full">
-                                    </div>
+                                    <div class="select-none block">6</div>
                                 </span>
                             </label>
                             <label
                                 class="cursor-pointer btn-check-form  flex justify-start items-start relative bg-gray-50 dark:bg-gray-700 border border-gray-400 px-4 py-3 flex flex-shrink-0 justify-center items-center hover:bg-white  hover:border-secondary transition duration-500">
-                                <input wire:model="values_number" type="radio" value="Undecided"
+                                <input wire:model="values_number" name="travelers" type="radio" value="Undecided"
                                     class="hidden absolute">
                                 <svg class="fill-current hidden absolute left-0 top-0 p-1  w-7 h-7 text-secondary pointer-events-none"
                                     viewBox="0 0 20 20">
@@ -1884,6 +1885,7 @@
                                     <div class="select-none block text-xss tracking-tighter">Undecided</div>
                                 </span>
                             </label>
+
                         </div>
                     </div>
 
