@@ -20,9 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = $_POST['message'];
 
     $to = 'romanilm@yahoo.com';
-    $subject = 'New Tour Booking';
+    $subject = "New Tour Booking - $tour";
     $body = "Name: $name\nEmail: $email\nCountry Code: $country_code\nPhone: $phone\nTravelers: $travelers\nTour: $tour\nDate: $date\nMessage: $message";
-    $headers = "From: noreply@yourdomain.com\r\n";
+    $headers = "From: gettoperuform@gettoperu.com\r\n";
     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
     
