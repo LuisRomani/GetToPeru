@@ -1,0 +1,16 @@
+{
+    "name": "gehirn/get-to-peru",
+    "description": "Get to peru website.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Gehirn\\GetToPeru\\": "GetToPeru/"
+        }
+    },
+    "authors": [
+        {
+            "name": "LuisRomani"
+        }
+    ],
+    "require": {}
+}

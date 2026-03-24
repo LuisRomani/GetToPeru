@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  web:
+    image: gettoperu:latest
+    container_name: gettoperu-web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./public_html:/var/www/html
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./apache-config:/etc/apache2/sites-available
+    environment:
+      - PHP_MEMORY_LIMIT=512M
+      - PHP_MAX_EXECUTION_TIME=120
+    restart: always
+    networks:
+      - gettoperu-network
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/index.html"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  db:
+    image: mysql:8.0
+    container_name: gettoperu-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    networks:
+      - gettoperu-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  gettoperu-network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local

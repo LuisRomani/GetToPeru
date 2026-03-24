@@ -304,7 +304,7 @@
                 </svg>
             </span>
             <!--DECAY: Resources Options-->
-            <div class="bg-gray-200 absolute top-0 rounded-lg mt-16 w-72 z-50 shadow-lg" x-show="menu2"
+            <div class="bg-gray-200 absolute top-0 rounded-lg mt-8 w-72 z-50 shadow-lg" x-show="menu2"
                 x-on:click.away="menu2 = false" x-transition>
                 <!--DECAY: Menu Title-->
                 <div class="font-bold text-gray-500 flex justify-between text-xs px-5 py-3">INFORMATION
@@ -357,6 +357,18 @@
                     </span>
                     <span class="">
                         Sustainability Policy
+                    </span>
+                </a>
+                <a href="../contact.html"
+                    class="w-full text-sm flex items-center inline-flex transition-colors duration-200 block px-4 py-2 text-normal text-gray-500 rounded hover:bg-gray-700 hover:text-secondary menu-pop ">
+                    <span class="mr-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                    <span class="">
+                        Contact Us
                     </span>
                 </a>
             </div>
@@ -1744,6 +1756,7 @@
                         </div>
                     </div>
 
+
                     <div class=" mx-auto mt-3 grid grid-cols-6 mt-4 md:mt-6 gap-2">
                         <label
                             class="md:col-span-1 hidden md:inline-flex bg-gray-50 dark:bg-gray-700 border border-gray-400 p-5 flex items-center justify-center bg-gray-100 dark:bg-gray-700 ">
@@ -1754,11 +1767,12 @@
                             </svg>
                         </label>
                         <div class="col-span-6 md:col-span-5">
-                            <input autocomplete="new-password" wire:model="name" type="text"
+                            <input name="name" autocomplete="new-password" wire:model="name" type="text"
                                 class="bg-gray-50 dark:bg-gray-700 border border-gray-400 p-3 md:p-5 bg-gray-50 dark:bg-gray-700  w-full focus:outline-none"
                                 placeholder="Full Name *">
                         </div>
                     </div>
+
                     <div class=" mx-auto mt-3 grid grid-cols-6 mt-4 md:mt-6 gap-2">
                         <label
                             class="md:col-span-1 hidden md:inline-flex bg-gray-50 dark:bg-gray-700 border border-gray-400 p-5 flex items-center justify-center bg-gray-100 dark:bg-gray-700 ">
@@ -1769,7 +1783,7 @@
                             </svg>
                         </label>
                         <div class="col-span-6 md:col-span-5">
-                            <input autocomplete="new-password" wire:model="email" type="text"
+                            <input name="email" autocomplete="new-password" wire:model="email" type="text"
                                 class="bg-gray-50 dark:bg-gray-700 border border-gray-400 p-3 md:p-5 bg-gray-50 dark:bg-gray-700  w-full focus:outline-none"
                                 placeholder="Email *">
                         </div>
@@ -1784,10 +1798,11 @@
                             </svg>
                         </label>
                         <div class="col-span-6 md:col-span-5" wire:ignore>
-                            <input autocomplete="new-password" wire:model="phone" id="phone" type="text"
+                            <input name="phone" autocomplete="new-password" wire:model="phone" id="phone" type="text"
                                 class="phone_number bg-gray-50 dark:bg-gray-700 border border-gray-400 p-3 md:p-5 bg-gray-50 dark:bg-gray-700  w-full focus:outline-none"
                                 placeholder="  Phone number" data-intl-tel-input>
-                            <input autocomplete="new-password" type="hidden" wire:model="country" id="country" />
+                            <input name="country-code" autocomplete="new-password" type="hidden" wire:model="country"
+                                id="country" />
                         </div>
                     </div>
                     <div class=" mx-auto mt-3 grid grid-cols-6 mt-6 gap-2">
@@ -1800,8 +1815,8 @@
                             </svg>
                         </label>
                         <div class="col-span-6 md:col-span-5" x-data x-init="new Pikaday({ field: $refs.input })">
-                            <input x-ref="input" id="datepicker" autocomplete="off" wire:model.lazy="travel_day"
-                                type="text"
+                            <input name="date" x-ref="input" id="datepicker" autocomplete="off"
+                                wire:model.lazy="travel_day" type="text"
                                 class="bg-gray-50 dark:bg-gray-700 border border-gray-400 p-3 md:p-5 bg-gray-50 dark:bg-gray-700  w-full"
                                 placeholder="Travel date">
                         </div>
@@ -1815,8 +1830,8 @@
                                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
                         </div>
-                        <textarea wire:model="comment"
-                            class="col-span-6 md:col-span-5 bg-gray-50 dark:bg-gray-700 border border-gray-400 p-5 bg-gray-50 dark:bg-gray-700  w-full focus:outline-none"
+                        <textarea name="message" wire:model="comment"
+                            class="col-span-6 md:col-span-5 bg-gray-50 dark:bg-gray-700 border border-gray-400 p-5 bg-gray-50 dark:bg-gray-700  w/full focus:outline-none"
                             rows="4" placeholder="What can we do for you? We have it all. Just ask!"></textarea>
 
                         <p class="text-xs col-span-6 text-right text-gray-400 font-bold">You can request any
@@ -1824,7 +1839,7 @@
                     </div>
                 </div>
                 <div class="mx-auto">
-                    <button type="submit" class="btn-primary" wire:click="load_submit">
+                    <button type="submit" class="btn-primary">
                         Book a Tour<span wire:loading wire:target="load_submit">
                             <div class="lds-hourglass"></div>
                         </span>

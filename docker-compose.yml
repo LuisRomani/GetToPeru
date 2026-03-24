@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gettoperu-web
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - PHP_MEMORY_LIMIT=256M
+      - PHP_MAX_EXECUTION_TIME=60
+    restart: unless-stopped
+    networks:
+      - gettoperu-network
+    depends_on:
+      - db
+
+  # Optional: MySQL database service for contact form storage
+  db:
+    image: mysql:8.0
+    container_name: gettoperu-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_NAME:-gettoperu}
+      MYSQL_USER: ${DB_USER:-gettoperu}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-gettoperu123}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - gettoperu-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Optional: phpMyAdmin for database management
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: gettoperu-phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${DB_USER:-gettoperu}
+      PMA_PASSWORD: ${DB_PASSWORD:-gettoperu123}
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - gettoperu-network
+    depends_on:
+      - db
+
+  # Mail service for development/testing
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: gettoperu-mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    restart: unless-stopped
+    networks:
+      - gettoperu-network
+
+networks:
+  gettoperu-network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local

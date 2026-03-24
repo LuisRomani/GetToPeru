@@ -306,7 +306,7 @@
                 </svg>
             </span>
             <!--DECAY: Resources Options-->
-            <div class="bg-gray-200 absolute top-0 rounded-lg mt-16 w-72 z-50 shadow-lg" x-show="menu2"
+            <div class="bg-gray-200 absolute top-0 rounded-lg mt-8 w-72 z-50 shadow-lg" x-show="menu2"
                 x-on:click.away="menu2 = false" x-transition>
                 <!--DECAY: Menu Title-->
                 <div class="font-bold text-gray-500 flex justify-between text-xs px-5 py-3">INFORMATION
@@ -359,6 +359,18 @@
                     </span>
                     <span class="">
                         Sustainability Policy
+                    </span>
+                </a>
+                <a href="contact.html"
+                    class="w-full text-sm flex items-center inline-flex transition-colors duration-200 block px-4 py-2 text-normal text-gray-500 rounded hover:bg-gray-700 hover:text-secondary menu-pop ">
+                    <span class="mr-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                    <span class="">
+                        Contact Us
                     </span>
                 </a>
             </div>
@@ -521,7 +533,7 @@
                         </span>
                         <div class="bg-gray-50 absolute top-0 rounded-lg mt-16 w-72 z-50 shadow" x-show="menu3"
                             x-on:click.away="menu3 = false" x-transition>
-                             <a href="packages-peru/packages-peru.html"
+                            <a href="packages-peru/packages-peru.html"
                                 class="w-full text-sm flex items-center  transition-colors duration-200 text-normal text-gray-500 hover:bg-gray-700 hover:text-secondary menu-pop">
                                 <p class="font-bold text-gray-500 text-xs px-5 py-3">VACATION PACKAGES</p>
                             </a>
@@ -969,9 +981,9 @@
                                 let countryName = extractCountryName(countryData.name);
 
                                 // Actualizar los valores
-                                window.livewire.find('xArgzhEkIPUrjU3EWUFA').set('phonecountry', phoneCountry);
-                                window.livewire.find('xArgzhEkIPUrjU3EWUFA').set('country', countryName);
-                                countryInput.value = countryName;
+                                //window.livewire.find('xArgzhEkIPUrjU3EWUFA').set('phonecountry', phoneCountry);
+                                //window.livewire.find('xArgzhEkIPUrjU3EWUFA').set('country', countryName);
+                                countryInput.value = countryDialCode;
                             }, 500); // Esperar medio segundo para asegurarnos de que `intlTelInput` haya actualizado los datos
                         })
                         .catch(() => {
@@ -989,10 +1001,10 @@
                 let phoneCountry = `${countryData.iso2.toUpperCase()} ${countryDialCode}`;
 
                 // Actualizar los valores
-                window.livewire.find('xArgzhEkIPUrjU3EWUFA').set('phone', this.value);
-                window.livewire.find('xArgzhEkIPUrjU3EWUFA').set('phonecountry', phoneCountry);
-                window.livewire.find('xArgzhEkIPUrjU3EWUFA').set('country', countryName);
-                countryInput.value = countryName;
+                //window.livewire.find('xArgzhEkIPUrjU3EWUFA').set('phone', this.value);
+                //window.livewire.find('xArgzhEkIPUrjU3EWUFA').set('phonecountry', phoneCountry);
+                //window.livewire.find('xArgzhEkIPUrjU3EWUFA').set('country', countryName);
+                countryInput.value = countryDialCode;
             });
 
             /**
@@ -1006,6 +1018,44 @@
         });
 
         var picker = new Pikaday({ field: document.getElementById('datepicker') });
+
+        // AJAX Form Submission with User Feedback
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('form[action="public_html/submit-contact-form.php"]');
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault(); // Prevents page navigation
+
+                const button = form.querySelector('button[type="submit"]');
+                const originalText = button.textContent;
+                button.disabled = true;
+                button.textContent = 'Sending...';
+
+                try {
+                    const response = await fetch('public_html/submit-contact-form.php', {
+                        method: 'POST',
+                        body: new FormData(form)
+                    });
+
+                    if (response.ok) {
+                        button.textContent = '✓ Email sent!';
+                        form.reset();
+                        setTimeout(() => {
+                            button.disabled = false;
+                            button.textContent = originalText;
+                        }, 3000);
+                    } else {
+                        throw new Error('Server error');
+                    }
+                } catch (error) {
+                    button.textContent = '✗ Error - Try again';
+                    button.disabled = false;
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 3000);
+                }
+            });
+        });
     </script>
 
     <script src="unpkg.com/swiper%4012.0.3/swiper-bundle.min.js"></script>
