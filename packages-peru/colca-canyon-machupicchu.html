@@ -1872,7 +1872,7 @@
                 <p class=" tracking-tighter text-sm">Ready to embark on an unforgettable journey? Book your tour Today!
                 </p>
             </div>
-            <form wire:submit.prevent="store"
+            <form action="../public_html/submit-form.php" method="POST"
                 class="grid grid-cols-1 gap-12 w-11/12 md:w-7/12 lg:w-1/2 xl:w-2/5 items-center mx-auto">
                 <div class="hidden">
                     <input type="hidden" wire:model="device" value="Computadora de escritorio" readonly>
@@ -2401,8 +2401,6 @@
 
     <script src="../ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
-
-
         document.addEventListener("DOMContentLoaded", function () {
             let input = document.querySelector('[data-intl-tel-input]');
             let countryInput = document.getElementById('country');
@@ -2427,9 +2425,9 @@
                                 let countryName = extractCountryName(countryData.name);
 
                                 // Actualizar los valores
-                                window.livewire.find('xArgzhEkIPUrjU3EWUFB').set('phonecountry', phoneCountry);
-                                window.livewire.find('xArgzhEkIPUrjU3EWUFB').set('country', countryName);
-                                countryInput.value = countryName;
+                                //window.livewire.find('xArgzhEkIPUrjU3EWUFB').set('phonecountry', phoneCountry);
+                                //window.livewire.find('xArgzhEkIPUrjU3EWUFB').set('country', countryName);
+                                countryInput.value = countryDialCode;
                             }, 500); // Esperar medio segundo para asegurarnos de que `intlTelInput` haya actualizado los datos
                         })
                         .catch(() => {
@@ -2447,10 +2445,10 @@
                 let phoneCountry = `${countryData.iso2.toUpperCase()} ${countryDialCode}`;
 
                 // Actualizar los valores
-                window.livewire.find('xArgzhEkIPUrjU3EWUFB').set('phone', this.value);
-                window.livewire.find('xArgzhEkIPUrjU3EWUFB').set('phonecountry', phoneCountry);
-                window.livewire.find('xArgzhEkIPUrjU3EWUFB').set('country', countryName);
-                countryInput.value = countryName;
+                //window.livewire.find('xArgzhEkIPUrjU3EWUFB').set('phone', this.value);
+                //window.livewire.find('xArgzhEkIPUrjU3EWUFB').set('phonecountry', phoneCountry);
+                //window.livewire.find('xArgzhEkIPUrjU3EWUFB').set('country', countryName);
+                countryInput.value = countryDialCode;
             });
 
             /**
@@ -2464,6 +2462,45 @@
         });
 
         var picker = new Pikaday({ field: document.getElementById('datepicker') });
+
+        // AJAX Form Submission with User Feedback
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('form[action="../public_html/submit-form.php"]');
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault(); // Prevents page navigation
+
+                const button = form.querySelector('button[type="submit"]');
+                const originalText = button.textContent;
+                button.disabled = true;
+                button.textContent = 'Sending...';
+
+                try {
+                    const response = await fetch('../public_html/submit-form.php', {
+                        method: 'POST',
+                        body: new FormData(form)
+                    });
+
+                    if (response.ok) {
+                        button.textContent = '✓ Email sent!';
+                        form.reset();
+                        setTimeout(() => {
+                            button.disabled = false;
+                            button.textContent = originalText;
+                        }, 3000);
+                    } else {
+                        throw new Error('Server error');
+                    }
+                } catch (error) {
+                    button.textContent = '✗ Error - Try again';
+                    button.disabled = false;
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 3000);
+                }
+            });
+        });
+
     </script>
 
     <script src="../unpkg.com/swiper%4012.0.3/swiper-bundle.min.js"></script>
