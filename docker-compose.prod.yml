@@ -5,12 +5,9 @@ services:
     image: gettoperu:latest
     container_name: gettoperu-web
     ports:
-      - "80:80"
-      - "443:443"
+      - "127.0.0.1:80:80"
     volumes:
       - ./public_html:/var/www/html
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-      - ./apache-config:/etc/apache2/sites-available
     environment:
       - PHP_MEMORY_LIMIT=512M
       - PHP_MAX_EXECUTION_TIME=120
@@ -18,36 +15,31 @@ services:
     networks:
       - gettoperu-network
     depends_on:
-      - db
+      - postfix
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/index.html"]
+      test: ["CMD", "curl", "-f", "http://localhost/"]
       interval: 30s
       timeout: 10s
       retries: 3
 
-  db:
-    image: mysql:8.0
-    container_name: gettoperu-db
+  # Local Postfix SMTP server for sending emails
+  postfix:
+    image: boky/postfix:latest
+    container_name: gettoperu-postfix
+    hostname: mail.gettoperu.local
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MAILNAME: gettoperu.local
+      ALLOWED_SENDER_DOMAINS: gettoperu.local
     volumes:
-      - db_data:/var/lib/mysql
+      - postfix_data:/var/spool/postfix
     restart: always
     networks:
       - gettoperu-network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
 networks:
   gettoperu-network:
     driver: bridge
 
 volumes:
-  db_data:
+  postfix_data:
     driver: local

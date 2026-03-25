@@ -45,22 +45,22 @@ RUN { \
     echo 'sendmail_path = "/usr/sbin/sendmail -t -i"'; \
     } > /usr/local/etc/php/conf.d/production.ini
 
-# Create necessary directories and msmtp config
+# Create necessary directories and msmtp config for local Postfix
 RUN mkdir -p /var/log/apache2 && \
     chown -R www-data:www-data /var/www/html /var/log/apache2 && \
     { \
     echo 'defaults'; \
     echo 'auth off'; \
     echo 'tls off'; \
-    echo 'domain localhost'; \
-    echo 'host mailhog'; \
-    echo 'port 1025'; \
-    echo 'from no-reply@localhost'; \
+    echo 'domain gettoperu.local'; \
+    echo 'host postfix'; \
+    echo 'port 25'; \
+    echo 'from noreply@gettoperu.local'; \
     echo ''; \
     echo 'account default'; \
-    echo 'host mailhog'; \
-    echo 'port 1025'; \
-    echo 'from no-reply@localhost'; \
+    echo 'host postfix'; \
+    echo 'port 25'; \
+    echo 'from noreply@gettoperu.local'; \
     } > /etc/msmtprc && \
     chmod 644 /etc/msmtprc && \
     { \
