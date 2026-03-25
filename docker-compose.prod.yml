@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: luisromani/gettoperu-web:latest
+    image: gettoperu:latest
     container_name: gettoperu-web
     ports:
       - "127.0.0.1:80:80"
@@ -22,7 +22,6 @@ services:
       timeout: 10s
       retries: 3
 
-  # Local Postfix SMTP server for sending emails
   postfix:
     image: boky/postfix:latest
     container_name: gettoperu-postfix
